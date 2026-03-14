@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Pringle | ME 210 Final Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cardinal: #8C1515;
+      --cardinal-dark: #6B0F0F;
+      --sandstone: #D2C295;
+      --palo-alto: #175E54;
+      --fog: #F4F1ED;
+      --stone: #544948;
+      --white: #FFFFFF;
+      --black: #1A1A1A;
+      --light-gray: #F7F7F7;
+      --border: #E0DDD8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: var(--black);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* --- NAV --- */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      padding: 0 2rem;
+    }
+    nav .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    nav .logo {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--cardinal);
+      text-decoration: none;
+    }
+    nav .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    nav .nav-links a {
+      text-decoration: none;
+      color: var(--stone);
+      font-size: 0.85rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav .nav-links a:hover { color: var(--cardinal); }
+
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--black);
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+
+    /* --- SECTIONS --- */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+    }
+    section:first-of-type { padding-top: 7rem; }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--cardinal);
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--cardinal);
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--sandstone);
+    }
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    p { margin-bottom: 1rem; color: var(--stone); }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--stone);
+      margin-bottom: 2rem;
+    }
+
+    /* --- HERO --- */
+    .hero-img {
+      width: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin: 2rem 0;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+
+    /* --- DIAGRAM IMAGES --- */
+    .diagram-container {
+      text-align: center;
+      margin: 1.5rem 0;
+    }
+    .diagram-container img {
+      max-width: 100%;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .diagram-container .caption {
+      font-size: 0.85rem;
+      color: #888;
+      margin-top: 0.5rem;
+      font-style: italic;
+    }
+
+    /* --- BOM TABLE --- */
+    .bom-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.9rem;
+    }
+    .bom-table th {
+      background: var(--cardinal);
+      color: var(--white);
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-weight: 600;
+    }
+    .bom-table td {
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--stone);
+    }
+    .bom-table tr:nth-child(even) { background: var(--fog); }
+    .bom-table tr:hover { background: #EDE9E0; }
+
+    /* --- CODE BLOCK --- */
+    .code-block {
+      background: var(--black);
+      color: #E0E0E0;
+      border-radius: 8px;
+      padding: 1.5rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      line-height: 1.7;
+      margin: 1rem 0;
+      max-height: 600px;
+      overflow-y: auto;
+    }
+    .code-block .comment { color: #6A9955; }
+    .code-block .keyword { color: #569CD6; }
+    .code-block .define { color: #C586C0; }
+    .code-block .number { color: #B5CEA8; }
+    .code-block .string { color: #CE9178; }
+    .code-block .type { color: #4EC9B0; }
+    .code-block .func { color: #DCDCAA; }
+
+    .code-filename {
+      display: inline-block;
+      background: var(--stone);
+      color: var(--white);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px 6px 0 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      margin-bottom: -1px;
+    }
+
+    /* --- CALCULATIONS --- */
+    .calc-card {
+      background: var(--fog);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      border-left: 4px solid var(--cardinal);
+    }
+    .calc-card h3 { margin-top: 0; color: var(--cardinal); }
+    .calc-card code {
+      background: var(--white);
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    /* --- TAKEAWAYS --- */
+    .takeaway-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .takeaway-card {
+      background: var(--fog);
+      border-radius: 8px;
+      padding: 1.5rem;
+      border-top: 3px solid var(--cardinal);
+    }
+    .takeaway-card h3 {
+      margin-top: 0;
+      color: var(--cardinal-dark);
+    }
+
+    /* --- DIVIDER --- */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--fog);
+      color: var(--stone);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    /* --- MOBILE --- */
+    @media (max-width: 768px) {
+      .hamburger { display: block; }
+      nav .nav-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        flex-direction: column;
+        padding: 1rem 2rem;
+        border-bottom: 1px solid var(--border);
+        gap: 0.8rem;
+      }
+      nav .nav-links.open { display: flex; }
+      h1 { font-size: 1.8rem; }
+      h2 { font-size: 1.3rem; }
+      section { padding: 3rem 1.2rem 2rem; }
+      section:first-of-type { padding-top: 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="logo">Team Pringle</a>
+    <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#bom">Bill of Materials</a></li>
+      <li><a href="#state-diagram">State Diagram</a></li>
+      <li><a href="#circuit-diagram">Circuit Diagram</a></li>
+      <li><a href="#calculations">Calculations</a></li>
+      <li><a href="#code">Code</a></li>
+      <li><a href="#takeaways">Team Takeaways</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HOME -->
+<section id="home">
+  <h1>Turty Droid</h1>
+  <p class="subtitle">ME 210: Introduction to Mechatronics &mdash; Winter 2026 Final Project</p>
+
+  <img src="images/team_photo.png" alt="Team Pringle with Turty Droid" class="hero-img">
+
+  <p>
+    Team Pringle designed and built <strong>Turty Droid</strong>, an autonomous robot for the ME 210 final project challenge.
+    Our robot uses ultrasonic sensors for navigation, a PD control loop for wall-following,
+    and an encoder-controlled shooting mechanism to launch pucks across the playing field.
+  </p>
+  <p>
+    The robot autonomously rotates to find a wall, aligns itself using side-mounted ultrasonic sensors,
+    follows the wall using proportional-derivative control, drives to the shooting zone,
+    aligns for a shot, and fires three pucks in succession before stopping.
+  </p>
+</section>
+
+<hr class="section-divider">
+
+<!-- BILL OF MATERIALS -->
+<section id="bom">
+  <h2>Bill of Materials</h2>
+  <p>Key components used in the Turty Droid build:</p>
+  <table class="bom-table">
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>Qty</th>
+        <th>Purpose</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Arduino UNO R3</td><td>1</td><td>Main microcontroller</td></tr>
+      <tr><td>L298N Motor Driver</td><td>1</td><td>Drive motor control (H-bridge)</td></tr>
+      <tr><td>DC Gearmotor (drive)</td><td>2</td><td>Left &amp; right wheel drive</td></tr>
+      <tr><td>DC Motor (shooter)</td><td>1</td><td>Puck shooting mechanism</td></tr>
+      <tr><td>Rotary Encoder</td><td>1</td><td>Shooter motor position feedback</td></tr>
+      <tr><td>HC-SR04 Ultrasonic Sensor</td><td>3</td><td>Back, left, and right distance sensing</td></tr>
+      <tr><td>9V Battery Pack</td><td>1</td><td>Motor power supply</td></tr>
+      <tr><td>Potentiometer</td><td>1</td><td>Tuning / calibration</td></tr>
+      <tr><td>Chassis (laser-cut acrylic)</td><td>1</td><td>Robot frame</td></tr>
+      <tr><td>Caster Wheel</td><td>1</td><td>Rear support</td></tr>
+      <tr><td>Jumper Wires &amp; Breadboard</td><td>&mdash;</td><td>Connections</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="section-divider">
+
+<!-- STATE DIAGRAM -->
+<section id="state-diagram">
+  <h2>State Diagram</h2>
+  <p>
+    The robot operates as a finite state machine with the following states. Transitions are driven by
+    ultrasonic sensor readings and timer events.
+  </p>
+  <div class="diagram-container">
+    <img src="images/state_diagram.png" alt="State diagram showing robot behavior states">
+    <div class="caption">Hand-drawn state diagram for Turty Droid</div>
+  </div>
+
+  <h3>States Overview</h3>
+  <table class="bom-table">
+    <thead>
+      <tr><th>State</th><th>Behavior</th><th>Transition</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Rotate CCW 1</td><td>Spin counter-clockwise searching for back wall</td><td>Back sensor &le; 15 cm</td></tr>
+      <tr><td>Rotate CCW 2</td><td>Continue spinning to detect side alignment</td><td>Left + Right &approx; 90 cm</td></tr>
+      <tr><td>Line Following</td><td>PD-controlled wall following using side sensors</td><td>Back sensor &ge; 150 cm</td></tr>
+      <tr><td>Align &amp; Shoot</td><td>Fine-tune alignment, then fire 3 pucks</td><td>3 shots completed</td></tr>
+      <tr><td>Retreating</td><td>Drive in reverse toward loading zone</td><td>Back sensor &le; 15 cm</td></tr>
+      <tr><td>Loading</td><td>Wait 10 seconds for puck reload</td><td>Timer expires</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="section-divider">
+
+<!-- CIRCUIT DIAGRAM -->
+<section id="circuit-diagram">
+  <h2>Circuit Diagram</h2>
+  <p>
+    The circuit is centered around an Arduino UNO R3 driving motors through an L298N H-bridge driver.
+    Three HC-SR04 ultrasonic sensors handle distance measurement, and a rotary encoder provides
+    position feedback for the shooting mechanism.
+  </p>
+  <div class="diagram-container">
+    <img src="images/circuit_diagram.png" alt="KiCad circuit schematic">
+    <div class="caption">KiCad schematic &mdash; Arduino UNO + L298N motor driver</div>
+  </div>
+
+  <h3>Pin Assignments</h3>
+  <table class="bom-table">
+    <thead>
+      <tr><th>Function</th><th>Arduino Pin(s)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Left Motor (PWM / IN1 / IN2)</td><td>6 / 7 / 8</td></tr>
+      <tr><td>Right Motor (PWM / IN3 / IN4)</td><td>9 / 13 / 12</td></tr>
+      <tr><td>Shooter Motor (PWM / IN1 / IN2)</td><td>16 / 15 / 14</td></tr>
+      <tr><td>Shooter Encoder (A)</td><td>18</td></tr>
+      <tr><td>Back Ultrasonic (Trig / Echo)</td><td>2 / 3</td></tr>
+      <tr><td>Left Ultrasonic (Trig / Echo)</td><td>10 / 11</td></tr>
+      <tr><td>Right Ultrasonic (Trig / Echo)</td><td>4 / 5</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<hr class="section-divider">
+
+<!-- CALCULATIONS -->
+<section id="calculations">
+  <h2>Calculations</h2>
+
+  <div class="calc-card">
+    <h3>Ultrasonic Distance</h3>
+    <p>Each HC-SR04 measures time-of-flight and converts to centimeters:</p>
+    <p><code>distance = (pulseIn_duration &times; 0.0343) / 2</code></p>
+    <p>Speed of sound at room temperature &asymp; 343 m/s = 0.0343 cm/&mu;s. Divide by 2 for round-trip.</p>
+  </div>
+
+  <div class="calc-card">
+    <h3>PD Wall-Following Control</h3>
+    <p>The line-following state uses a PD controller on the difference between left and right distances:</p>
+    <p><code>error = leftDistance &minus; rightDistance</code></p>
+    <p><code>derivative = error &minus; lastError</code></p>
+    <p><code>leftSpeed = BASE_LEFT &minus; Kp &times; error &minus; Kd &times; derivative</code></p>
+    <p><code>rightSpeed = BASE_RIGHT + Kp &times; error + Kd &times; derivative</code></p>
+    <p>Tuned constants: <code>Kp = 0.7</code>, <code>Kd = 0</code> (derivative term disabled after tuning). Speeds clamped to [0, 160].</p>
+  </div>
+
+  <div class="calc-card">
+    <h3>Shooter Encoder Positioning</h3>
+    <p>The shooting motor uses a rotary encoder for precise 90&deg; quarter-turn shots:</p>
+    <p><code>PPR = 690</code> (pulses per revolution)</p>
+    <p><code>COUNTS_90 = (PPR + 2) / 4 = 173 counts</code></p>
+    <p>A slowdown window of 100 counts linearly ramps PWM from 205 down to 15 for smooth stops.</p>
+  </div>
+
+  <div class="calc-card">
+    <h3>Timer1 Interrupt (Control Loop Rate)</h3>
+    <p>Timer1 is configured in CTC mode for a 100 Hz control loop:</p>
+    <p><code>OCR1A = (16 MHz / 64 / 100 Hz) &minus; 1 = 2499</code></p>
+    <p>Prescaler = 64. This gives a 10 ms control period for the PD loop.</p>
+  </div>
+
+  <div class="calc-card">
+    <h3>Side-Sum Alignment</h3>
+    <p>Wall alignment is detected when the sum of left and right distances hits a target:</p>
+    <p><code>Target Sum = 101.3 cm &plusmn; 1.5 cm</code> (for rotation alignment)</p>
+    <p><code>Target Sum = 101.3 cm &plusmn; 0.5 cm</code> (for fine shoot alignment)</p>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- CODE -->
+<section id="code">
+  <h2>Code</h2>
+  <p>
+    The full Arduino sketch running on Turty Droid. The robot is implemented as a finite state machine
+    with interrupt-driven encoder counting and a Timer1-based control loop.
+  </p>
+  <span class="code-filename">turty_droid.ino</span>
+  <div class="code-block"><pre id="code-content">Loading...</pre></div>
+</section>
+
+<hr class="section-divider">
+
+<!-- TEAM TAKEAWAYS -->
+<section id="takeaways">
+  <h2>Team Takeaways</h2>
+
+  <div class="takeaway-grid">
+    <div class="takeaway-card">
+      <h3>Sensor Filtering Matters</h3>
+      <p>
+        Raw ultrasonic readings were noisy and occasionally returned bogus values (&gt;300 cm).
+        Adding a simple validity check (discarding readings above 300 cm) dramatically improved
+        reliability. If we had more time, a running average or median filter would have helped further.
+      </p>
+    </div>
+    <div class="takeaway-card">
+      <h3>Tune in the Real Environment</h3>
+      <p>
+        PD gains that worked on a test table didn't transfer to the competition arena.
+        Wall distances, surface friction, and battery voltage all affected behavior.
+        We learned to bring a laptop and tune on-site during practice rounds.
+      </p>
+    </div>
+    <div class="takeaway-card">
+      <h3>Mechanical Simplicity Wins</h3>
+      <p>
+        Our initial designs were overly complex. The final "turret on a differential drive" concept
+        was mechanically simple and much easier to debug. Fewer moving parts meant fewer failure modes.
+      </p>
+    </div>
+    <div class="takeaway-card">
+      <h3>State Machines Are Your Friend</h3>
+      <p>
+        Structuring the code as a finite state machine made debugging straightforward &mdash;
+        we could isolate and test each state independently. Serial logging of state transitions
+        was invaluable during competition.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Team Pringle &mdash; ME 210, Winter 2026 &mdash; Stanford University</p>
+</footer>
+
+<script>
+// Load the Arduino code with syntax highlighting
+fetch('turty_droid.ino')
+  .then(r => r.text())
+  .then(code => {
+    const el = document.getElementById('code-content');
+    // Basic syntax highlighting
+    let highlighted = code
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/(\/\/.*)/g, '<span class="comment">$1</span>')
+      .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="comment">$1</span>')
+      .replace(/\b(void|int|float|long|bool|unsigned|const|static|volatile|enum|return|if|else|switch|case|break|true|false)\b/g, '<span class="keyword">$1</span>')
+      .replace(/^(\s*#define\s+\w+)/gm, '<span class="define">$1</span>')
+      .replace(/\b(\d+\.?\d*[fFuUlL]*)\b/g, '<span class="number">$1</span>')
+      .replace(/"([^"]*)"/g, '<span class="string">"$1"</span>');
+    el.innerHTML = highlighted;
+  })
+  .catch(() => {
+    document.getElementById('code-content').textContent = 'Failed to load code file.';
+  });
+
+// Close mobile nav on link click
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.remove('open');
+  });
+});
+</script>
+
+</body>
+</html>

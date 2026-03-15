@@ -6,35 +6,38 @@
   <title>Team Pringle | ME 210 Final Project</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500;600&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0C0C0E;
-      --bg-raised: #141418;
-      --bg-card: #1A1A20;
-      --surface: #22222A;
-      --border: #2E2E38;
-      --border-light: #3A3A46;
-      --text: #E8E6E3;
-      --text-dim: #9B9A97;
-      --text-muted: #6B6A68;
-      --accent: #D4A853;
-      --accent-dim: rgba(212, 168, 83, 0.15);
-      --accent-glow: rgba(212, 168, 83, 0.08);
-      --red: #C75050;
-      --green: #6BCB77;
-      --blue: #5B9BD5;
+      --bg: #091412;
+      --bg-raised: #0F1E1A;
+      --bg-card: #142822;
+      --surface: #1A322B;
+      --border: #1F3D34;
+      --border-light: #2B5246;
+      --text: #E4EDE8;
+      --text-dim: #94ADA2;
+      --text-muted: #5E7D71;
+      --accent: #5EC69B;
+      --accent-bright: #7EDBB5;
+      --accent-dim: rgba(94, 198, 155, 0.12);
+      --accent-glow: rgba(94, 198, 155, 0.06);
+      --shell: #C4956A;
+      --shell-dim: rgba(196, 149, 106, 0.15);
+      --red: #D06060;
+      --green: #5EC69B;
+      --blue: #6ABED8;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Outfit', sans-serif;
+      font-family: 'Nunito', sans-serif;
       color: var(--text);
       background: var(--bg);
       line-height: 1.7;
-      font-weight: 300;
+      font-weight: 400;
       overflow-x: hidden;
     }
 
@@ -46,7 +49,7 @@
       width: 100%; height: 100%;
       pointer-events: none;
       z-index: 9999;
-      opacity: 0.025;
+      opacity: 0.02;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
     }
 
@@ -57,7 +60,7 @@
       width: 100%;
       z-index: 1000;
       padding: 0 2rem;
-      background: rgba(12, 12, 14, 0.85);
+      background: rgba(9, 20, 18, 0.88);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
@@ -71,28 +74,29 @@
       height: 64px;
     }
     .logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.2rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
       color: var(--accent);
       text-decoration: none;
       letter-spacing: 0.02em;
     }
+    .logo .turtle-icon { margin-right: 0.4rem; }
     .nav-links {
       display: flex;
-      gap: 0.25rem;
+      gap: 0.2rem;
       list-style: none;
     }
     .nav-links a {
       text-decoration: none;
       color: var(--text-dim);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      font-weight: 500;
-      padding: 0.4rem 0.7rem;
-      border-radius: 6px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
       transition: all 0.2s;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
+      letter-spacing: 0.02em;
     }
     .nav-links a:hover {
       color: var(--accent);
@@ -102,7 +106,7 @@
       display: none;
       background: none;
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 8px;
       cursor: pointer;
       padding: 8px;
       transition: border-color 0.2s;
@@ -132,8 +136,9 @@
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background:
-        radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-glow), transparent),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(91, 155, 213, 0.04), transparent);
+        radial-gradient(ellipse 70% 50% at 50% -10%, var(--accent-glow), transparent),
+        radial-gradient(ellipse 50% 40% at 20% 90%, rgba(196, 149, 106, 0.03), transparent),
+        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(106, 190, 216, 0.03), transparent);
     }
     .hero-content {
       max-width: 1000px;
@@ -165,7 +170,7 @@
     }
     .hero h1 em {
       font-style: italic;
-      color: var(--accent);
+      color: var(--accent-bright);
     }
     .hero-desc {
       font-size: 1.1rem;
@@ -198,6 +203,32 @@
       object-fit: cover;
       display: block;
     }
+    .team-names {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 1.0s forwards;
+      flex-wrap: wrap;
+    }
+    .team-names span {
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-dim);
+      position: relative;
+    }
+    .team-names span::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
 
     /* --- SECTIONS --- */
     .section {
@@ -219,9 +250,9 @@
       flex-shrink: 0;
     }
     .section-header h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 2rem;
-      font-weight: 400;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
       color: var(--text);
       letter-spacing: -0.01em;
     }
@@ -230,12 +261,12 @@
       margin-bottom: 1.2rem;
       font-size: 1rem;
     }
-    .section strong { color: var(--text); font-weight: 500; }
+    .section strong { color: var(--text); font-weight: 600; }
 
     h3 {
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: 'Nunito', sans-serif;
       font-size: 0.85rem;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--accent);
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -255,7 +286,7 @@
 
     /* --- GOOGLE SHEET EMBED --- */
     .sheet-wrap {
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
       border: 1px solid var(--border);
       background: var(--bg-card);
@@ -270,7 +301,7 @@
     /* --- DIAGRAM --- */
     .diagram {
       margin: 1.5rem 0;
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
       border: 1px solid var(--border);
       background: var(--bg-card);
@@ -283,8 +314,9 @@
     .diagram-caption {
       padding: 0.75rem 1rem;
       background: var(--surface);
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
       color: var(--text-muted);
       border-top: 1px solid var(--border);
     }
@@ -297,7 +329,7 @@
       margin: 1.5rem 0;
     }
     .schematic-card {
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
       border: 1px solid var(--border);
       background: var(--bg-card);
@@ -311,17 +343,17 @@
     }
     .schematic-label .tag {
       display: inline-block;
-      font-family: 'IBM Plex Mono', monospace;
+      font-family: 'Nunito', sans-serif;
       font-size: 0.65rem;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
       margin-bottom: 0.5rem;
     }
-    .tag-initial { background: rgba(199, 80, 80, 0.15); color: var(--red); }
-    .tag-final { background: rgba(107, 203, 119, 0.15); color: var(--green); }
+    .tag-initial { background: rgba(208, 96, 96, 0.15); color: var(--red); }
+    .tag-final { background: rgba(94, 198, 155, 0.15); color: var(--green); }
     .schematic-label p {
       font-size: 0.85rem;
       color: var(--text-dim);
@@ -337,9 +369,9 @@
       font-size: 0.85rem;
     }
     .data-table th {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      font-weight: 600;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -360,7 +392,7 @@
       color: var(--accent);
     }
     .table-wrap {
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
       border: 1px solid var(--border);
     }
@@ -374,16 +406,16 @@
     }
     .calc-card {
       background: var(--bg-card);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 1.5rem;
       border: 1px solid var(--border);
       transition: border-color 0.3s;
     }
     .calc-card:hover { border-color: var(--border-light); }
     .calc-card h4 {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.8rem;
-      font-weight: 600;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
       color: var(--text);
       margin-bottom: 0.75rem;
     }
@@ -398,7 +430,7 @@
       color: var(--accent);
       background: var(--accent-dim);
       padding: 0.2rem 0.5rem;
-      border-radius: 4px;
+      border-radius: 6px;
     }
 
     /* --- CODE --- */
@@ -408,7 +440,7 @@
       justify-content: space-between;
       background: var(--surface);
       padding: 0.75rem 1.25rem;
-      border-radius: 12px 12px 0 0;
+      border-radius: 14px 14px 0 0;
       border: 1px solid var(--border);
       border-bottom: none;
     }
@@ -423,15 +455,14 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      border: 1px solid var(--border);
     }
-    .code-dots span:nth-child(1) { background: var(--red); border-color: var(--red); }
-    .code-dots span:nth-child(2) { background: var(--accent); border-color: var(--accent); }
-    .code-dots span:nth-child(3) { background: var(--green); border-color: var(--green); }
+    .code-dots span:nth-child(1) { background: var(--red); }
+    .code-dots span:nth-child(2) { background: var(--shell); }
+    .code-dots span:nth-child(3) { background: var(--green); }
     .code-block {
       background: var(--bg-raised);
       color: var(--text-dim);
-      border-radius: 0 0 12px 12px;
+      border-radius: 0 0 14px 14px;
       padding: 1.5rem;
       overflow-x: auto;
       font-family: 'IBM Plex Mono', monospace;
@@ -442,10 +473,10 @@
       border: 1px solid var(--border);
       border-top: none;
     }
-    .code-block .comment { color: #5C6370; }
+    .code-block .comment { color: #4A6B5D; }
     .code-block .keyword { color: var(--blue); }
-    .code-block .define { color: #C678DD; }
-    .code-block .number { color: var(--green); }
+    .code-block .define { color: #C08CDC; }
+    .code-block .number { color: var(--shell); }
     .code-block .string { color: #E5C07B; }
 
     /* --- TAKEAWAY CARDS --- */
@@ -457,7 +488,7 @@
     }
     .takeaway-card {
       background: var(--bg-card);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 1.75rem;
       border: 1px solid var(--border);
       transition: all 0.3s;
@@ -469,18 +500,18 @@
       position: absolute;
       top: 0; left: 0; right: 0;
       height: 2px;
-      background: linear-gradient(90deg, var(--accent), transparent);
+      background: linear-gradient(90deg, var(--accent), var(--shell), transparent);
     }
     .takeaway-card:hover {
       border-color: var(--border-light);
       transform: translateY(-2px);
     }
     .takeaway-card h4 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.05rem;
       color: var(--text);
       margin-bottom: 0.75rem;
-      font-weight: 400;
+      font-weight: 700;
     }
     .takeaway-card p {
       font-size: 0.88rem;
@@ -497,10 +528,11 @@
       margin-top: 2rem;
     }
     footer p {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
       color: var(--text-muted);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.03em;
     }
 
     /* --- ANIMATIONS --- */
@@ -531,7 +563,7 @@
         display: none;
         position: absolute;
         top: 64px; left: 0; right: 0;
-        background: rgba(12, 12, 14, 0.95);
+        background: rgba(9, 20, 18, 0.95);
         backdrop-filter: blur(20px);
         flex-direction: column;
         padding: 1rem 1.5rem;
@@ -545,6 +577,8 @@
       .section-header h2 { font-size: 1.5rem; }
       .schematic-grid { grid-template-columns: 1fr; }
       .takeaway-grid { grid-template-columns: 1fr; }
+      .team-names { gap: 1rem; }
+      .team-names span { font-size: 0.8rem; }
     }
   </style>
 </head>
@@ -553,7 +587,7 @@
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
-    <a href="#home" class="logo">Team Pringle</a>
+    <a href="#home" class="logo"><span class="turtle-icon">&#x1F422;</span> Team Pringle</a>
     <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -580,6 +614,12 @@
     </p>
     <div class="hero-img-wrap">
       <img src="images/team_photo.png" alt="Team Pringle with Turty Droid" class="hero-img">
+    </div>
+    <div class="team-names">
+      <span>Andrew Sung</span>
+      <span>Senching Hsia</span>
+      <span>Jeremy Merritt</span>
+      <span>Libby Ye</span>
     </div>
   </div>
 </div>
@@ -779,7 +819,7 @@
 </div>
 
 <footer>
-  <p>Team Pringle &middot; ME 210, Winter 2026 &middot; Stanford University</p>
+  <p>&#x1F422; Team Pringle &middot; ME 210, Winter 2026 &middot; Stanford University</p>
 </footer>
 
 <script>

@@ -212,14 +212,17 @@
       animation: fadeUp 0.8s 1.0s forwards;
       flex-wrap: wrap;
     }
-    .team-names span {
+    .team-names a {
       font-family: 'Nunito', sans-serif;
       font-size: 0.9rem;
       font-weight: 600;
       color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
       position: relative;
     }
-    .team-names span::before {
+    .team-names a:hover { color: var(--accent); }
+    .team-names a::before {
       content: '';
       display: inline-block;
       width: 6px;
@@ -587,7 +590,7 @@
       .schematic-grid { grid-template-columns: 1fr; }
       .takeaway-grid { grid-template-columns: 1fr; }
       .team-names { gap: 1rem; }
-      .team-names span { font-size: 0.8rem; }
+      .team-names a { font-size: 0.8rem; }
     }
   </style>
 </head>
@@ -625,10 +628,10 @@
       <img src="images/team_photo.png" alt="Team Pringle with Turty Droid" class="hero-img">
     </div>
     <div class="team-names">
-      <span>Andrew Sung</span>
-      <span>Senching Hsia</span>
-      <span>Jeremy Merritt</span>
-      <span>Libby Ye</span>
+      <a href="https://www.linkedin.com/in/drewsungg/" target="_blank" rel="noopener">Andrew Sung</a>
+      <a href="https://denim-elephant-sxl2.squarespace.com" target="_blank" rel="noopener">Senching Hsia</a>
+      <a href="https://jbmdesign.squarespace.com" target="_blank" rel="noopener">Jeremy Merritt</a>
+      <a href="https://www.libbyye.com" target="_blank" rel="noopener">Libby Ye</a>
     </div>
   </div>
 </div>

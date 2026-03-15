@@ -532,6 +532,25 @@
       line-height: 1.7;
     }
 
+    /* --- COMPETITION PHOTOS --- */
+    .competition-photos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .comp-photo {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .comp-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     /* --- FOOTER --- */
     footer {
       text-align: center;
@@ -644,7 +663,7 @@
     <h2>Bill of Materials</h2>
   </div>
   <div class="sheet-wrap">
-    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTdMlFcpCfVQXO0tzXHR_qX0Bveb1S6tAkMkYhA_IHjb6jLyppqX3Vg3B84LINTw9SgiC_XeqLm5Qp6/pubhtml?widget=true&amp;headers=false"></iframe>
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vSYawoNj-K6jSiH1UnyHNc2eVrt-nmbdKJm-x0JI9AqnkYAJ7HF2kmr_7uWu6fManTCJTHOi9Eazl6D/pubhtml?widget=true&amp;headers=false"></iframe>
   </div>
 </div>
 
@@ -830,6 +849,30 @@
         Structuring code as an FSM made debugging straightforward &mdash; we could isolate
         and test each state independently. Serial logging of state transitions was invaluable.
       </p>
+    </div>
+  </div>
+</div>
+
+<!-- COMPETITION -->
+<div class="divider"><hr></div>
+<div class="section reveal" id="competition">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <h2>Competition Day</h2>
+  </div>
+  <p>
+    Team Pringle made it to the <strong>semifinals</strong> of ME 210: The Joy of Curling!
+  </p>
+  <div class="diagram">
+    <img src="images/standings.jpg" alt="ME 210 competition bracket showing Team Pringle in semifinals">
+    <div class="diagram-caption">Tournament bracket &mdash; Team Pringle seeded #12, advanced to the semis</div>
+  </div>
+  <div class="competition-photos">
+    <div class="comp-photo">
+      <img src="images/turty_go.jpeg" alt="Turty Droid on the competition field">
+    </div>
+    <div class="comp-photo">
+      <img src="images/team_smiles.jpeg" alt="Team Pringle cheering during competition">
     </div>
   </div>
 </div>

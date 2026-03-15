@@ -1034,9 +1034,12 @@
             </p>
           </div>
         </div>
-        <div class="schematic-card" style="border-color: #2596be;">
+        <div class="schematic-card" style="border-color: #f4f3ee">
           <div class="schematic-img-wrap">
-            <img src="images/final_schematic.png" alt="Final circuit schematic" />
+            <img
+              src="images/final_schematic.png"
+              alt="Final circuit schematic"
+            />
           </div>
           <div class="schematic-label">
             <span class="tag tag-final">Final Design</span>
@@ -1238,6 +1241,19 @@
       </p>
       <div class="diagram">
         <img
+          src="images/map.png"
+          alt="Arena map showing the 4-foot by 16-foot curling sheet layout"
+        />
+        <div class="diagram-caption">
+          The arena: a 4' &times; 16' curling sheet. Each robot starts with 3
+          pucks, autonomously navigates to a shooting position, and fires at a
+          bullseye target &mdash; 5 pts for the center, 2 for the middle ring,
+          1 for the outer ring. After shooting, the robot returns to its
+          starting zone for a reload. Matches are 2-minute head-to-head rounds.
+        </div>
+      </div>
+      <div class="diagram">
+        <img
           src="images/standings.jpg"
           alt="ME 210 competition bracket showing Team Pringle in semifinals"
         />
@@ -1248,28 +1264,50 @@
       </div>
       <div class="gallery-grid">
         <div class="gallery-item">
-          <img src="images/turty_go.jpeg" alt="Turty Droid on the competition field" />
-          <div class="gallery-caption">Turty takes the field</div>
+          <img
+            src="images/turty_go.jpeg"
+            alt="Turty Droid on the competition field"
+          />
+          <div class="gallery-caption">Turty takes the field 🐢</div>
         </div>
         <div class="gallery-item">
-          <img src="images/team_smiles.jpeg" alt="Team Pringle cheering during competition" />
-          <div class="gallery-caption">Fingers crossed, prayers up</div>
+          <img
+            src="images/team_smiles.jpeg"
+            alt="Team Pringle cheering during competition"
+          />
+          <div class="gallery-caption">Fingers crossed, prayers up 🤞</div>
         </div>
         <div class="gallery-item">
-          <img src="images/initial_launch.png" alt="Team watching Turty Droid's first launch" />
-          <div class="gallery-caption">Holding our breath for the first launch</div>
+          <img
+            src="images/initial_launch.png"
+            alt="Team watching Turty Droid's first launch"
+          />
+          <div class="gallery-caption">
+            Holding our breath for the first launch 🫣
+          </div>
         </div>
         <div class="gallery-item">
-          <img src="images/pit_stop.jpeg" alt="Team making last-minute adjustments to Turty" />
-          <div class="gallery-caption">Last-second pit stop adjustments</div>
+          <img
+            src="images/pit_stop.jpeg"
+            alt="Team making last-minute adjustments to Turty"
+          />
+          <div class="gallery-caption">Last-second pit stop adjustments 🏎️</div>
         </div>
         <div class="gallery-item">
-          <img src="images/team_cook.png" alt="Team Pringle strategizing around the arena" />
-          <div class="gallery-caption">Strategizing around the arena</div>
+          <img
+            src="images/team_cook.png"
+            alt="Team Pringle strategizing around the arena"
+          />
+          <div class="gallery-caption">Strategizing around the arena 🎯</div>
         </div>
         <div class="gallery-item">
-          <img src="images/libby_jeremy_senching_cook.png" alt="Libby, Jeremy, and Senching debugging in the lab" />
-          <div class="gallery-caption">Late-night lab session with the whiteboard</div>
+          <img
+            src="images/libby_jeremy_senching_cook.png"
+            alt="Libby, Jeremy, and Senching debugging in the lab"
+          />
+          <div class="gallery-caption">
+            Late-night lab session with the whiteboard 🧠
+          </div>
         </div>
       </div>
     </div>
@@ -1363,7 +1401,9 @@
       lightbox.addEventListener("click", (e) => {
         if (e.target !== lightboxImg) closeLightbox();
       });
-      document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+      document
+        .getElementById("lightbox-close")
+        .addEventListener("click", closeLightbox);
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") closeLightbox();
       });

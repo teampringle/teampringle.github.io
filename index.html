@@ -370,13 +370,24 @@
         border: 1px solid var(--border);
         background: var(--bg-card);
         transition: border-color 0.3s;
+        display: flex;
+        flex-direction: column;
       }
       .schematic-card:hover {
         border-color: var(--border-light);
       }
+      .schematic-card .schematic-img-wrap {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--surface);
+        overflow: hidden;
+      }
       .schematic-card img {
         width: 100%;
         display: block;
+        object-fit: contain;
       }
       .schematic-label {
         padding: 1rem;
@@ -624,6 +635,34 @@
         height: 100%;
         object-fit: cover;
         display: block;
+      }
+
+      /* --- LIGHTBOX --- */
+      .lightbox {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        align-items: center;
+        justify-content: center;
+        cursor: zoom-out;
+        padding: 2rem;
+      }
+      .lightbox.open {
+        display: flex;
+      }
+      .lightbox img {
+        max-width: 90vw;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+      }
+      .expandable {
+        cursor: zoom-in;
       }
 
       /* --- FOOTER --- */
@@ -891,10 +930,12 @@
 
       <div class="schematic-grid">
         <div class="schematic-card">
-          <img
-            src="images/initial_schematic.png"
-            alt="Initial circuit schematic"
-          />
+          <div class="schematic-img-wrap">
+            <img
+              src="images/initial_schematic.png"
+              alt="Initial circuit schematic"
+            />
+          </div>
           <div class="schematic-label">
             <span class="tag tag-initial">Initial Design</span>
             <p>
@@ -904,7 +945,9 @@
           </div>
         </div>
         <div class="schematic-card">
-          <img src="images/final_schematic.png" alt="Final circuit schematic" />
+          <div class="schematic-img-wrap">
+            <img src="images/final_schematic.png" alt="Final circuit schematic" />
+          </div>
           <div class="schematic-label">
             <span class="tag tag-final">Final Design</span>
             <p>
@@ -1100,8 +1143,8 @@
         <h2>Competition Day</h2>
       </div>
       <p>
-        Team Pringle made it to the <strong>semis</strong> of the <em>ME 210: The Joy of
-        Curling!</em> tourney!
+        Team Pringle made it to the <strong>semis</strong> of the
+        <em>ME 210: The Joy of Curling</em> tourney!
       </p>
       <div class="diagram">
         <img
@@ -1127,6 +1170,11 @@
           />
         </div>
       </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+      <img id="lightbox-img" src="" alt="Expanded view" />
     </div>
 
     <footer>
@@ -1185,6 +1233,24 @@
         a.addEventListener("click", () =>
           document.querySelector(".nav-links").classList.remove("open"),
         );
+      });
+
+      // Lightbox
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      document
+        .querySelectorAll(
+          ".diagram img, .schematic-card img, .comp-photo img, .hero-img",
+        )
+        .forEach((img) => {
+          img.classList.add("expandable");
+          img.addEventListener("click", () => {
+            lightboxImg.src = img.src;
+            lightbox.classList.add("open");
+          });
+        });
+      lightbox.addEventListener("click", () => {
+        lightbox.classList.remove("open");
       });
     </script>
   </body>

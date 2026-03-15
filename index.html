@@ -327,8 +327,29 @@
 <!-- BILL OF MATERIALS -->
 <section id="bom">
   <h2>Bill of Materials</h2>
-  <div class="diagram-container">
-    <img src="images/BoM.png" alt="Bill of Materials spreadsheet" style="width:100%;">
+  <div style="overflow-x:auto;">
+    <table class="bom-table">
+      <thead>
+        <tr>
+          <th>Component Category</th>
+          <th>Part Name</th>
+          <th>Units</th>
+          <th>Unit Price</th>
+          <th>Total Cost</th>
+          <th>Supplier</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Line Sensor</td><td>TCRT5000</td><td>5</td><td>$1.19</td><td>$5.95</td><td>Digikey</td><td>Delivered</td></tr>
+        <tr><td>IR Sensor</td><td>TSDP34356</td><td>5</td><td>$1.13</td><td>$5.65</td><td>Digikey</td><td>Delivered</td></tr>
+        <tr><td>Servo (loading plate)</td><td>900-00005</td><td>1</td><td>$15.08</td><td>$15.08</td><td>Digikey</td><td>Delivered</td></tr>
+        <tr><td>Stronger Servo (loading plate)</td><td>GX3270BLS</td><td>1</td><td>$47.88</td><td>$47.88</td><td>Amazon</td><td>Delivered</td></tr>
+        <tr><td>Fly-wheel Motor</td><td>Uxcell 1000rpm</td><td>2</td><td>$11.62</td><td>$23.24</td><td>Harfington</td><td>Delivered</td></tr>
+        <tr><td>Main Wheel Motor</td><td>FIT0186</td><td>2</td><td>$16.50</td><td>$33.00</td><td>Digikey</td><td>Delivered</td></tr>
+        <tr><td>Buck Converter</td><td>XL6019</td><td>1</td><td>N/A</td><td>&mdash;</td><td>Closet</td><td>Delivered</td></tr>
+      </tbody>
+    </table>
   </div>
 </section>
 
@@ -367,17 +388,32 @@
 <!-- CIRCUIT DIAGRAM -->
 <section id="circuit-diagram">
   <h2>Circuit Diagram</h2>
+
+  <h3>Initial Design</h3>
   <p>
-    The circuit is centered around an Arduino UNO R3 driving motors through an L298N H-bridge driver.
-    Three HC-SR04 ultrasonic sensors handle distance measurement, and a rotary encoder provides
-    position feedback for the shooting mechanism.
+    Our initial schematic used <strong>3 TCRT5000 line-following sensors</strong> to track lines up the field
+    and <strong>4 TSDP34356 IR sensors</strong> (2 front, 2 back) with MCP6294 op-amp signal conditioning
+    to orient the robot forward and backward. While functional, this approach required significant
+    analog circuitry and was sensitive to ambient IR noise.
   </p>
   <div class="diagram-container">
-    <img src="images/circuit_diagram.png" alt="KiCad circuit schematic">
-    <div class="caption">KiCad schematic &mdash; Arduino UNO + L298N motor driver</div>
+    <img src="images/initial_schematic.png" alt="Initial KiCad circuit schematic with IR and line sensors">
+    <div class="caption">Initial schematic &mdash; 4 IR sensors + 3 line sensors + L298N motor driver</div>
   </div>
 
-  <h3>Pin Assignments</h3>
+  <h3>Final Design</h3>
+  <p>
+    We simplified to <strong>3 HC-SR04 ultrasonic sensors</strong> (left, right, rear) to measure distance
+    from the arena walls. This eliminated the need for op-amp circuitry and line sensors entirely,
+    resulting in a cleaner, more reliable system. Wall-following via PD control on the left/right
+    distance difference replaced line-following.
+  </p>
+  <div class="diagram-container">
+    <img src="images/final_schematic.png" alt="Final KiCad circuit schematic with ultrasonic sensors">
+    <div class="caption">Final schematic &mdash; 3 ultrasonic sensors + L298N motor driver</div>
+  </div>
+
+  <h3>Pin Assignments (Final Design)</h3>
   <table class="bom-table">
     <thead>
       <tr><th>Function</th><th>Arduino Pin(s)</th></tr>

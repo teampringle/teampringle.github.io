@@ -661,8 +661,98 @@
         border-radius: 8px;
         box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
       }
+      .lightbox-close {
+        position: absolute;
+        top: 1.5rem;
+        right: 1.5rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        font-size: 1.2rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .lightbox-close:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
       .expandable {
         cursor: zoom-in;
+      }
+
+      /* --- GALLERY --- */
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+      .gallery-item {
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: var(--bg-card);
+      }
+      .gallery-item img {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        display: block;
+      }
+      .gallery-caption {
+        padding: 0.6rem 1rem;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        border-top: 1px solid var(--border);
+        background: var(--surface);
+      }
+
+      /* --- EASTER EGG --- */
+      .easter-egg {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+        box-shadow: 0 4px 16px rgba(45, 140, 94, 0.3);
+        transition: transform 0.2s;
+      }
+      .easter-egg:hover {
+        transform: scale(1.1);
+      }
+      .twerk-popup {
+        display: none;
+        position: fixed;
+        bottom: 4.5rem;
+        right: 1rem;
+        z-index: 999;
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        border: 2px solid var(--accent);
+      }
+      .twerk-popup.show {
+        display: block;
+      }
+      .twerk-popup img {
+        width: 180px;
+        display: block;
       }
 
       /* --- FOOTER --- */
@@ -944,7 +1034,7 @@
             </p>
           </div>
         </div>
-        <div class="schematic-card">
+        <div class="schematic-card" style="border-color: #2596be;">
           <div class="schematic-img-wrap">
             <img src="images/final_schematic.png" alt="Final circuit schematic" />
           </div>
@@ -1156,24 +1246,43 @@
           :D
         </div>
       </div>
-      <div class="competition-photos">
-        <div class="comp-photo">
-          <img
-            src="images/turty_go.jpeg"
-            alt="Turty Droid on the competition field"
-          />
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img src="images/turty_go.jpeg" alt="Turty Droid on the competition field" />
+          <div class="gallery-caption">Turty takes the field</div>
         </div>
-        <div class="comp-photo">
-          <img
-            src="images/team_smiles.jpeg"
-            alt="Team Pringle cheering during competition"
-          />
+        <div class="gallery-item">
+          <img src="images/team_smiles.jpeg" alt="Team Pringle cheering during competition" />
+          <div class="gallery-caption">Fingers crossed, prayers up</div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/initial_launch.png" alt="Team watching Turty Droid's first launch" />
+          <div class="gallery-caption">Holding our breath for the first launch</div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/pit_stop.jpeg" alt="Team making last-minute adjustments to Turty" />
+          <div class="gallery-caption">Last-second pit stop adjustments</div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/team_cook.png" alt="Team Pringle strategizing around the arena" />
+          <div class="gallery-caption">Strategizing around the arena</div>
+        </div>
+        <div class="gallery-item">
+          <img src="images/libby_jeremy_senching_cook.png" alt="Libby, Jeremy, and Senching debugging in the lab" />
+          <div class="gallery-caption">Late-night lab session with the whiteboard</div>
         </div>
       </div>
     </div>
 
+    <!-- EASTER EGG -->
+    <button class="easter-egg" id="egg-btn" title="?">&#x1F422;</button>
+    <div class="twerk-popup" id="twerk-popup">
+      <img src="images/turtle_twerk.gif" alt="Turtle twerk" />
+    </div>
+
     <!-- LIGHTBOX -->
     <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" id="lightbox-close">&times;</button>
       <img id="lightbox-img" src="" alt="Expanded view" />
     </div>
 
@@ -1238,9 +1347,11 @@
       // Lightbox
       const lightbox = document.getElementById("lightbox");
       const lightboxImg = document.getElementById("lightbox-img");
+      const closeLightbox = () => lightbox.classList.remove("open");
+
       document
         .querySelectorAll(
-          ".diagram img, .schematic-card img, .comp-photo img, .hero-img",
+          ".diagram img, .schematic-card img, .gallery-item img, .hero-img",
         )
         .forEach((img) => {
           img.classList.add("expandable");
@@ -1249,8 +1360,19 @@
             lightbox.classList.add("open");
           });
         });
-      lightbox.addEventListener("click", () => {
-        lightbox.classList.remove("open");
+      lightbox.addEventListener("click", (e) => {
+        if (e.target !== lightboxImg) closeLightbox();
+      });
+      document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeLightbox();
+      });
+
+      // Easter egg
+      const eggBtn = document.getElementById("egg-btn");
+      const twerk = document.getElementById("twerk-popup");
+      eggBtn.addEventListener("click", () => {
+        twerk.classList.toggle("show");
       });
     </script>
   </body>
